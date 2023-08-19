@@ -1,5 +1,11 @@
-
+import {useState, useEffect} from 'react'
 const Formulario = () => {
+   
+  const [nombre, setNombre] = useState('') //primera regla: en la parte superior del componente y dentro del componente
+  //no definir un hook dentro dentro de un condicional
+  //no se define despues del return
+  //y solo definir hooks dentro del componente
+  
   return (
     <div className="md:w-1/2 lg:w-2/5">
       <h2 className="font-black text-3xl text-center">Seguimiento Pacientes</h2>
