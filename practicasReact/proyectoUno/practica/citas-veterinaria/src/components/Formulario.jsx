@@ -6,6 +6,7 @@ const Formulario = () => {
   const [email, setEmail] = useState('')
   const [alta, setAlta] = useState('')
   const [sintomas, setSintomas] = useState('')
+  const [error, setError] = useState(false)
   //no definir un hook dentro dentro de un condicional
   //no se define despues del return
   //y solo definir hooks dentro del componente
@@ -13,6 +14,13 @@ const Formulario = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log("enviando Formulario")
+
+    if([nombre, dueno, email, alta, sintomas ].includes('')){
+      setError(true)
+    }
+    else{
+      setError(false)
+    }
   }
   return (
     <div className="md:w-1/2 lg:w-2/5">
@@ -26,6 +34,7 @@ const Formulario = () => {
       <form 
       onSubmit={handleSubmit}
       className="bg-white shadow-md rounded-lg py-10 px-5 mb-5" action="">
+        
         <div className="mb-5">
           <label htmlFor="mascota" className="block text-gray-700 uppercase font-bold">
             Nombre Mascota
@@ -95,7 +104,7 @@ const Formulario = () => {
           onChange={(e) => setSintomas(e.target.value)}
           />
         </div>
-
+        {error && (<div className=' bg-red-800 p-3 mb-3 rounded-lg uppercase font-bold  text-white text-center'><p>Todos los campos son obligatorios</p></div>)}
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all" 
