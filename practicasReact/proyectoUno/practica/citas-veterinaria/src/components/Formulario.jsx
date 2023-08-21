@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
-const Formulario = () => {
+import Error from './Error'
+const Formulario = ({setPacientes, pacientes}) => {
    
   const [nombre, setNombre] = useState('') //primera regla: en la parte superior del componente y dentro del componente
   const [dueno, setDueno] = useState('')
@@ -7,9 +8,17 @@ const Formulario = () => {
   const [alta, setAlta] = useState('')
   const [sintomas, setSintomas] = useState('')
   const [error, setError] = useState(false)
+
   //no definir un hook dentro dentro de un condicional
   //no se define despues del return
   //y solo definir hooks dentro del componente
+
+  const generarid = () =>{
+    const random = Math.random().toString(36).substring(2)
+    const fecha = Date.now().toString(36)
+
+    return random+fecha
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -20,6 +29,21 @@ const Formulario = () => {
     }
     else{
       setError(false)
+      const objetoPaciente = {
+        nombre,
+        dueno,
+        email,
+        alta,
+        sintomas,
+        id: generarid()
+      }
+
+      setPacientes( [...pacientes , objetoPaciente] )
+      setNombre("")
+      setAlta("")
+      setDueno("")
+      setEmail("")
+      setSintomas("")
     }
   }
   return (
@@ -104,7 +128,7 @@ const Formulario = () => {
           onChange={(e) => setSintomas(e.target.value)}
           />
         </div>
-        {error && (<div className=' bg-red-800 p-3 mb-3 rounded-lg uppercase font-bold  text-white text-center'><p>Todos los campos son obligatorios</p></div>)}
+        {error && <Error> todos los campos son obligatorios </Error> }
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all" 
