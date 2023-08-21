@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import Error from './Error'
-const Formulario = ({setPacientes, pacientes}) => {
+const Formulario = ({setPacientes, pacientes, paciente}) => {
    
   const [nombre, setNombre] = useState('') //primera regla: en la parte superior del componente y dentro del componente
   const [dueno, setDueno] = useState('')
@@ -9,6 +9,8 @@ const Formulario = ({setPacientes, pacientes}) => {
   const [sintomas, setSintomas] = useState('')
   const [error, setError] = useState(false)
 
+  useEffect(()=>{
+  },[paciente])
   //no definir un hook dentro dentro de un condicional
   //no se define despues del return
   //y solo definir hooks dentro del componente
