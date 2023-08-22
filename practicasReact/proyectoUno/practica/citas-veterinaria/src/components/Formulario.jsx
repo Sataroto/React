@@ -10,6 +10,13 @@ const Formulario = ({setPacientes, pacientes, paciente}) => {
   const [error, setError] = useState(false)
 
   useEffect(()=>{
+    if(Object.keys(paciente).length>0){
+      setNombre(paciente.nombre)
+      setDueno(paciente.dueno)
+      setEmail(paciente.email)
+      setAlta(paciente.alta)
+      setSintomas(paciente.sintomas)
+    }
   },[paciente])
   //no definir un hook dentro dentro de un condicional
   //no se define despues del return
@@ -134,7 +141,7 @@ const Formulario = ({setPacientes, pacientes, paciente}) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all" 
-          value="Agregar paciente"
+          value={paciente.id? 'Editar Paciente':'Agregar Paciente'}
 
         
         />
