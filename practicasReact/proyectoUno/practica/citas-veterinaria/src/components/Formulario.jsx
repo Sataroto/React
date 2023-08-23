@@ -44,10 +44,20 @@ const Formulario = ({setPacientes, pacientes, paciente}) => {
         email,
         alta,
         sintomas,
-        id: generarid()
       }
 
-      setPacientes( [...pacientes , objetoPaciente] )
+      if(paciente.id ){
+        console.log('editando')
+        objetoPaciente.id = paciente.id
+
+        const pacientesActualizados = pacientes.map( pacienteState => pacienteState.id === paciente.id   ? objetoPaciente : pacienteState )
+        setPacientes(pacientesActualizados)
+      }
+      else{
+        objetoPaciente.id = generarid()
+        setPacientes( [...pacientes , objetoPaciente] )
+        setPaciente({})
+      }
       setNombre("")
       setAlta("")
       setDueno("")
